@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     const $alert = Array.prototype.slice.call(document.querySelectorAll('.notification .delete'), 0);
       if ($alert.length > 0) {  
       $alert.forEach( el => {

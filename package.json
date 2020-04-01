@@ -8,6 +8,7 @@
     "node": "13.x"
   },
   "scripts": {
+    "start": "",
     "build": "npm install",
     "heroku-postbuild": "echo Skip build on Heroku"
   },

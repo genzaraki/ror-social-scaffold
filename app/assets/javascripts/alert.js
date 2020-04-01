@@ -9,6 +9,5 @@ document.addEventListener('DOMContentLoaded', function() {
   
         });
       });
-    }
-  
+    }  
   });

@@ -17,4 +17,17 @@ module ApplicationHelper
       link_to('Like!', post_likes_path(post_id: post.id), method: :post, class: 'tag is-light is-rounded')
     end
   end
+
+  def friendship_button(user)
+    return false if current_user.id == user.id
+    class_name= "button is-rounded"
+    link_path="#"
+    link_text ="Add Friend"
+    icon ="plus"
+    content_tag :a, href: link_path, class: class_name do
+      concat content_tag :span,fa_icon(icon.to_s), class:"icon"      
+      concat content_tag :span,link_text      
+    end
+  end
+
 end

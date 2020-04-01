@@ -16,11 +16,16 @@ body {
 }
 .container{
   max-width: 900px;
+  position: relative;
 }
 .account{
   .sidebar{
-    position: sticky;
-    top: 60px;
+    height: 100%;
+    .sidebar-menu{
+      position: sticky;
+      top: 60px;
+
+    }
   }
   .navbar{
     box-shadow: 0px 2px 1px rgba(0,0,0,0.1);

@@ -1,10 +1,35 @@
 <div class="sidebar">
     <div class="card">
-        <div class="card-header">
-            <h2 class="card-header-title">Add New Post</h2>
-        </div>
-        <div class="card-content">
             
+        <div class="card-content">
+            <a  href="<%= user_path(current_user) %>"> 
+            <figure class="image">
+                <img src="https://placeimg.com/60/60/people?id=<%= current_user.id%>" class="is-rounded">
+            </figure>
+            </a>
+        </div>
+        <div class="card-footer">
+            <div class="card-footer-item">
+              
+                <a  class="has-text-black has-text-centered is-size-6" title="See Profile" href="<%= user_path(current_user) %>"> <%= current_user.name %></a>
+            </div>
+        </div>
+      </div>
+    <div class="card sidebar-menu">
+        
+        <div class="card-content">
+            <div class="menu">
+                <ul class="menu-list">
+                    <li><a class=""><span>Friends</span><span class="tag is-link is-rounded is-pulled-right">500</span></a></li>
+                    <li>
+                        <a>
+                            <span>friendships requests</span>
+                            <span class="tag is-danger is-rounded is-pulled-right">1</span>
+                            <span class="tag is-light is-rounded is-pulled-right">0</span>
+                        </a>
+                    </li>
+                  </ul>
+            </div>
         </div>
     </div>
 </div>

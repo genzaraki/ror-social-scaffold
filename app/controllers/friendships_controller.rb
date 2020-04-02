@@ -16,7 +16,7 @@ class FriendshipsController < ApplicationController
 
   def create
     receiver = User.find(params[:user][:receiver_id])
-    return unless current_user.friend?(receiver)
+    return if current_user.friend?(receiver)
 
     Friendship.create(sender_id: current_user.id, receiver_id: receiver.id, accepted: nil)
 

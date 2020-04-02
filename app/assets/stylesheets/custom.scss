@@ -18,6 +18,11 @@ body {
   max-width: 900px;
   position: relative;
 }
+.field_with_errors{
+  .input{
+    border-color:red;
+  }
+}
 .account{
   .sidebar{
     height: 100%;

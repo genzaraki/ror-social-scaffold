@@ -1,22 +1,23 @@
 <div class="hero is-fullheight">
     <div class="hero-body">
       <div class="container">
-                <h2 class="title has-text-centered">Sign up</h2>
+      <h1 class="has-text-centered has-text-danger is-size-1 title">Ashu</h1>
         <div class="card session-form">
             <div class="card-content">
+                <h2 class="title has-text-centered is-size-4">Sign up</h2>
               <%= render "partials/alert"%>
                 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
                   <%= render "devise/shared/error_messages", resource: resource %>
                   <div class="field">
                     <%= f.label :name,class:"label" %>
                     <p class="control">                      
-                      <%= f.text_field :name, autofocus: true, autocomplete: "name",class:"input" %>
+                      <%= f.text_field :name, autofocus: true, autocomplete: "name",class:"input",required: true %>
                     </p>
                   </div>
                   <div class="field">
                     <%= f.label :email,class:"label" %>
                     <p class="control">                      
-                      <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"input" %>
+                      <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"input",required: true %>
                     </p>
                   </div>
                   <div class="field">
@@ -24,12 +25,12 @@
                     <% if @minimum_password_length %>
                     <em>(<%= @minimum_password_length %> characters minimum)</em>
                     <% end %>
-                    <%= f.password_field :password, autocomplete: "new-password",class:"input" %>
+                    <%= f.password_field :password, autocomplete: "new-password",class:"input",required: true %>
                   </div>
 
                   <div class="field">
                     <%= f.label :password_confirmation,class:"label" %>
-                    <%= f.password_field :password_confirmation, autocomplete: "new-password",class:"input" %>
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password",class:"input",required: true %>
                   </div>
 
                 

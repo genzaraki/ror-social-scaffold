@@ -10,30 +10,56 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  has_many :friendships
-  has_many :invers_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :sent_friendships, class_name: 'Friendship', foreign_key: 'sender_id'
+  has_many :received_friendships, class_name: 'Friendship', foreign_key: 'receiver_id'
 
   def friends
-    friends_array = friendships.map { |friend_ship| friend_ship.friend if friend_ship.confirmed }
-    friends_array + inverse_friendships.map { |friend_ship| friend_ship.user if friend_ship.confirmed }
-    friends_array.compact
+    sent_friendship_requests    = sent_friendships.map{|friendship| friendship.receiver if friendship.accepted}
+    received_friendship_requests = received_friendships.map{|friendship| friendship.sender if friendship.accepted}
+    (sent_friendship_requests+received_friendship_requests).compact
   end
 
   def pending_friends
-    friendships.map { |friendship| friendship.friend unless friendship.confirmed }.compact
+    sent_friendships.map { |friendship| friendship.receiver unless friendship.accepted }.compact
   end
 
   def friend_requests
-    inverse_friendships.map { |friendship| friendship.user unless friendship.confirmed }.compact
+    received_friendships.map { |friendship| friendship.sender unless !friendship.accepted==false }.compact
+  end
+  
+ 
+  def confirm_friend(user)
+    friendship = received_friendships.find { |friendship| friendship.sender == user }
+    friendship.accepted = true    
+    friends << friendship
+    friendship.save
+  end
+  
+  
+  def reject_friend(user)
+    friendship = received_friendships.find { |friendship| friendship.sender == user }
+    friendship.delete
   end
 
-  def confirm_friend(user)
-    friendship = inverse_friendships.find { |friend_ship| friend_ship.user == user }
-    friendship.confirmed = true
-    friendship.save
+  def cancel_friend(user)
+    friendship = sent_friendships.find { |friendship| friendship.receiver == user }    
+    friendship.delete
+  end
+
+  def delete_friend(user)
+    friendship = sent_friendships.find { |friendship| friendship.receiver == user || friendship.sender == user }    
+    friendship.delete
   end
 
   def friend?(user)
     friends.include?(user)
+  end
+
+  def request_sent?(user)
+    pending_friends.include?(user)
+  end
+
+  def request_received?(user)
+    friend_requests.include?(user)
   end
 end

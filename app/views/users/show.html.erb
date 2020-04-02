@@ -1,11 +1,15 @@
 <div class="hero is-medium is-link">
     <div class="hero-body">
-        <div class="title"><%= "#{@user.name}" %></div>
+        <div class="title">
+          <%= "#{@user.name}" %>
+          <div class="is-pulled-right">
+            <%= render "partials/friend_actions" %>
+          </div>
+        </div>
         <div class="subtitle">
           Registered since :<%= @user.created_at.strftime("%Y/%m/%d") %>
         </div>
-        <%= friendship_button @user%>
-       
+        
     </div>
 </div>
 <br/>

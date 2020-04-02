@@ -18,16 +18,48 @@ module ApplicationHelper
     end
   end
 
-  def friendship_button(user)
-    return false if current_user.id == user.id
-    class_name= "button is-rounded"
+  def send_friendship_button(user)
+    return nil if current_user.id == user.id 
+    if current_user.request_sent?(user)
+      link_text="Awaiting"
+      icon="circle"
+      class_name="tag is-rounded "
+      content_tag :span, class: class_name do
+        concat content_tag :span,fa_icon(icon.to_s), class:"icon"      
+        concat content_tag :span,link_text      
+      end
+    else
+      class_name= "button is-rounded is-small"
+      link_text ="Add Friend"
+      icon ="plus"
+      content_tag :button, class: class_name,id:'add_friend' do
+        concat content_tag :span,fa_icon(icon.to_s), class:"icon"      
+        concat content_tag :span,link_text      
+      end
+    end
+
+    
+
+    
+  end
+  def answer_friendship_button(user)
+    return nil if current_user.id == user.id 
+    class_name= "tag is-rounded is-small"
     link_path="#"
-    link_text ="Add Friend"
+    link_text ="Accept Friend"
     icon ="plus"
-    content_tag :a, href: link_path, class: class_name do
+
+    content_tag :button, class: class_name do
       concat content_tag :span,fa_icon(icon.to_s), class:"icon"      
       concat content_tag :span,link_text      
     end
+
+    
+  end
+
+  def accept_friendship(user)
+    form_tag({:controller => "friendships", :action => "search"}, :method => "get", :class => "nifty_form")
+
   end
 
 end

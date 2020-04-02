@@ -33,4 +33,9 @@ RSpec.describe User, type: :model do
       expect(user.save).to eq(false)
     end
   end
+
+  context 'It has Associations' do    
+    it { should have_many(:sent_friendships) }
+    it { should have_many(:received_friendships) }
+  end
 end

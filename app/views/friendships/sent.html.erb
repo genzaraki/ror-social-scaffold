@@ -1,0 +1,42 @@
+<section class="users-section">
+    <h1 class="title">Frienships requests sent</h1>
+  <div class="columns is-multiline">
+    <% @users.each do |user| %>
+        <div class="column is-3-desktop">
+        
+          <div class="card">
+            
+            <div class="card-content">
+                <a  href="<%= user_path(user) %>"> 
+                <figure class="image">
+                    <img src="https://placeimg.com/60/60/people?id=<%= user.id%>" class="is-rounded">
+                </figure>
+                </a>
+                <p class="has-text-centered">
+
+                    <a  class="has-text-black has-text-centered is-size-6" title="See Profile" href="<%= user_path(user) %>"> <%= user.name %></a>
+                </p>
+                <p class="has-text-centered">
+
+                </p>
+            </div>
+            <div class="card-footer">
+                
+              <div class="card-footer-item">               
+                  <%= form_for(current_user, url: user_friendships_cancel_path(current_user),method: :post) do |f| %>
+                      <%= f.hidden_field :sender_id, value: user.id %>
+                      <%= f.hidden_field :confirmed, value: true %>
+                      <button class="button is-white is-rounded is-small is-danger">
+                          <span class="icon"> <%= fa_icon "times"%></span>
+                          <span>Cancel</span>
+                         
+                      </button>
+                  <% end %> 
+              </div>
+            </div>
+            
+          </div>
+        </div>
+    <% end %>
+  </div>
+</section>

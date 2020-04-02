@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
       $navbarBurgers.forEach( function(el){
         el.addEventListener('click', function(){
   
-          const target = el.dataset.target;
-          const $target = document.getElementById(target);  
+          var target = el.dataset.target;
+          var $target = document.getElementById(target);  
           el.classList.toggle('is-active');
           $target.classList.toggle('is-active');
   

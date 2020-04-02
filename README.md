@@ -37,6 +37,11 @@ Setup database with:
    rails db:migrate
 ```
 
+Install npm packages
+
+```
+npm install
+```
 
 
 ### Usage

@@ -2,14 +2,53 @@
 <html>
   <head>
     <title>Ashu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>    
-    <main class="main">
-      <%= yield %>
+    <main class="container">
+    <div class="columns">
+          <div class="column is-hidden-touch">
+            <div class="hero is-fullheight">
+              <div class="hero-body">
+                <div class="container">                  
+                          
+                  <%= render "partials/home"%>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="hero is-fullheight">
+              <div class="hero-body">
+                <div class="container">
+                  <div class="is-hidden-desktop">
+                    <h1 class="has-text-centered has-text-danger is-size-1 title">Ashu</h1>
+                    <p class="subtitle has-text-centered">
+                        Socail NetWork build with RoR
+                    </p>
+                    <br>
+                  </div>
+                <%= yield %>
+                  
+                          
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+    
+
+
+
+
+
+
+
     </main>
   </body>
 </html>

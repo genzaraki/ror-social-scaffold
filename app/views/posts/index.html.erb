@@ -5,7 +5,7 @@
 
       <div class="field ">
         <p class="control is-expanded">
-          <%= form.text_area :content, id: :post_content, placeholder: 'Add New Post',class:"textarea newpost",rows:3 %>
+          <%= form.text_area :content, id: :post_content, placeholder: 'Add New Post',class:"textarea newpost",rows:3,required:true %>
         </p>      
       </div>
       <% if @post.errors.full_messages.any? %>

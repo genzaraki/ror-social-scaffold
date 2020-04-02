@@ -66,7 +66,7 @@
       <%= form_for(post.comments.new, url: post_comments_path(post)) do |form| %>
         <div class="field has-addons">
           <div class="control is-expanded">
-            <%= form.text_field :content, id: :comment_content, class: 'input is-small is-rounded has-background-light', placeholder: 'Add new Comment' %>
+            <%= form.text_field :content, id: :comment_content, class: 'input is-small is-rounded has-background-light', placeholder: 'Add new Comment',required:true %>
           </div>
           <div class="control">
             <button class="button is-light is-small is-rounded">

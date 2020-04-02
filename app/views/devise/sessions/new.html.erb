@@ -1,50 +1,37 @@
-<div class="hero is-fullheight">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="has-text-centered has-text-danger is-size-1 title">Ashu</h1>
-                
-        <div class="card session-form">
-          <div class="card-content">
-            <h2 class="title has-text-centered is-size-4">Sign in</h2>
-              <%= render "partials/alert"%>
-                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-                  <div class="field">
+<div class="card session-form">
+  <div class="card-content">
+    <h2 class="title has-text-centered is-size-4">Sign in</h2>
+      <%= render "partials/alert"%>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="field">
 
-                    <%= f.label :email,class:"label" %>
-                    <p class="control">
-                      <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"input" %>
-                    </p>
-                  </div>
+            <%= f.label :email,class:"label" %>
+            <p class="control">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"input  is-rounded" %>
+            </p>
+          </div>
 
-                  <div class="field">
-                    <%= f.label :password,class:"label" %>
-                    <p class="control">
-                      <%= f.password_field :password, autocomplete: "current-password",class:"input"  %>
-                    </p>
-                  </div>
+          <div class="field">
+            <%= f.label :password,class:"label" %>
+            <p class="control">
+              <%= f.password_field :password, autocomplete: "current-password",class:"input is-rounded"  %>
+            </p>
+          </div>
 
-                  <% if devise_mapping.rememberable? %>
-                    <div class="field">
-                      <%= f.check_box :remember_me %>
-                      <%= f.label :remember_me %>
-                    </div>
-                  <% end %>
-
-                  <div class="field">
-                    <%= f.submit "Log in",class:"button is-primary" %>
-                  </div>
-                <% end %>
+          <% if devise_mapping.rememberable? %>
+            <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
             </div>
-        </div>
-        <br/>
-        <div class="has-text-centered">
-          <%= render "devise/shared/links" %>
-        </div>
-      </div>
+          <% end %>
+
+          <div class="field">
+            <%= f.submit "Log in",class:"button is-primary is-fullwidth  is-rounded" %>
+          </div>
+        <% end %>
     </div>
 </div>
-
-
-
-
-
+<br/>
+<div class="has-text-centered">
+  <%= render "devise/shared/links" %>
+</div>

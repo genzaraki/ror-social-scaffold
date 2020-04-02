@@ -9,7 +9,7 @@
 
 ## Live Demo
 
-<a href="https://whispering-hollows-98373.herokuapp.com/" target="_blank">See Demo</a>
+<a href="https://serene-brook-13829.herokuapp.com/" target="_blank">See Demo</a>
 
 
 ## Getting Started

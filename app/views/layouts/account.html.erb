@@ -2,6 +2,7 @@
 <html class="has-navbar-fixed-top">
   <head>
     <title>Ashu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -13,13 +14,18 @@
     <%= render "partials/navbar"%>
     <%= render "partials/notice"%>
     <%= render "partials/alert"%>
-      <div class="columns">
-        <div class="column is-4">
-        <%= render "partials/sidebar"%>
-        </div>
-        <div class="column">
-          <%= yield %>
-        </div>
+    <div class="hero is-small">
+      <div class="hero-body">
+
+        <div class="columns">
+          <div class="column is-4">
+          <%= render "partials/sidebar"%>
+          </div>
+          <div class="column">
+            <%= yield %>
+          </div>
+      </div>
+      </div>
     </div>
       
     </main>

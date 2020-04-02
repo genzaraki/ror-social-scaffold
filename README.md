@@ -7,9 +7,9 @@
 - Ruby v2.7.0
 - Ruby on Rails v5.2.4
 
-## Live Demo(https://whispering-hollows-98373.herokuapp.com/)
+## Live Demo
 
-TBA
+<a href="https://whispering-hollows-98373.herokuapp.com/" target="_blank">See Demo</a>
 
 
 ## Getting Started

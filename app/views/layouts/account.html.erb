@@ -18,12 +18,13 @@
       <div class="hero-body">
 
         <div class="columns">
-          <div class="column is-4">
-          <%= render "partials/sidebar"%>
-          </div>
+          
           <div class="column">
             <%= yield %>
           </div>
+          <div class="column is-4">
+            <%= render "partials/sidebar"%>
+            </div>
       </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Friendships", type: :feature do
+RSpec.feature 'Friendships', type: :feature do
   let(:user1) { User.create(name: 'JohnDoe', email: 'johndoe@ymail.com', password: 'password') }
   let(:user2) { User.create(name: 'JaneDoe', email: 'janedoe@ymail.com', password: 'password') }
 
@@ -14,7 +14,7 @@ RSpec.feature "Friendships", type: :feature do
       expect(page).to have_content(user1.name.to_s)
       expect(page).to have_content('Signed in successfully')
       visit users_path
-      have_link user2.name , href: users_path(user2)
+      have_link user2.name, href: users_path(user2)
       visit users_path(user2)
     end
 
@@ -25,8 +25,6 @@ RSpec.feature "Friendships", type: :feature do
       expect(current_path).to eq user_friendships_sent_path(user1)
       expect(page).to have_content(user2.name.to_s)
     end
-
-
   end
   context 'Respond to a friend request' do
     before do
@@ -38,7 +36,7 @@ RSpec.feature "Friendships", type: :feature do
       expect(page).to have_content(user1.name.to_s)
       expect(page).to have_content('Signed in successfully')
       visit users_path
-      have_link user2.name , href: users_path(user2)
+      have_link user2.name, href: users_path(user2)
       visit users_path(user2)
       click_button 'add_friend'
       expect(page).to have_content('Friend Request send!.')
@@ -53,19 +51,16 @@ RSpec.feature "Friendships", type: :feature do
       visit user_friendships_received_path(user2)
     end
 
-    it 'Accepts  friend request' do      
+    it 'Accepts  friend request' do
       click_button 'accept_friend'
       expect(current_path).to eq user_friendships_path(user2)
-      expect(page).to have_content(user2.name.to_s)      
-      have_link user1.name , href: users_path(user1)
+      expect(page).to have_content(user2.name.to_s)
+      have_link user1.name, href: users_path(user1)
     end
-    it 'Rejects  friend request' do      
+    it 'Rejects  friend request' do
       click_button 'reject_friend'
       expect(current_path).to eq user_friendships_received_path(user2)
-      expect(page).to have_content("You have no friend requests for now.")      
-      
+      expect(page).to have_content('You have no friend requests for now.')
     end
-
-
   end
 end

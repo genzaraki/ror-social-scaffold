@@ -34,7 +34,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context 'It has Associations' do    
+  context 'It has Associations' do
     it { should have_many(:sent_friendships) }
     it { should have_many(:received_friendships) }
   end

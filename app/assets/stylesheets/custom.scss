@@ -62,11 +62,15 @@ body {
         //padding: 15px 0px;
         
       }
-  
+      .post-actions{
+        padding: 10px 0px;
+        border-top: 1px solid #f1f1f1;
+        margin-top: 10px;
+      }
       .comments-section{
         padding-top: 10px;
         border-top: 1px solid #f1f1f1;
-        margin-top: 16px;
+        
         .comment{
           display: flex;
           justify-content: flex-start;
@@ -89,6 +93,11 @@ body {
         }
       }
     }
+  }
+
+  .textarea.newpost{
+    min-height: 100px;
+    max-height: 100px;
   }
 }
 // $primary-color-dark: rgb(0, 86, 167);

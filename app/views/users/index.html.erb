@@ -1,5 +1,7 @@
 <section class="users-section">
-
+  <div class="notification is-white">
+        <h1 class="title is-size-6">Users</h1>
+    </div>
   <div class="columns is-multiline">
     <% @users.each do |user| %>
       <% next if current_user.id == user.id %>

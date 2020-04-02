@@ -16,7 +16,7 @@
           </div>
         </div>
         <div>
-          <%= like_or_dislike_btn(post) %>
+          
         </div>
       </div>
       
@@ -27,7 +27,16 @@
         <%= post.content.html_safe%>
       </p>
     
-      
+    <div class="post-actions">
+     
+      <%= like_or_dislike_btn(post) %> 
+      <span class="button is-small is-rounded">
+        <span class="icon"><%= fa_icon "comment" %></span>
+        <span>
+          <%= post.comments.count%>
+        </span>
+      </span>
+    </div>
     <div class='comments-section'>
       <% post.comments.each do |comment| %>
         <div class="comment">
@@ -60,7 +69,11 @@
             <%= form.text_field :content, id: :comment_content, class: 'input is-small is-rounded has-background-light', placeholder: 'Add new Comment' %>
           </div>
           <div class="control">
-            <%= form.submit 'Comment', class: 'button is-light is-small is-rounded' %>
+            <button class="button is-light is-small is-rounded">
+              <span class="icon">
+                <%= fa_icon "send"%>
+              </span>
+            </button>
           </div>
         </div>
         

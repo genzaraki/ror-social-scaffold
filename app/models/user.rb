@@ -47,8 +47,10 @@ class User < ApplicationRecord
   end
 
   def delete_friend(user)
-    friendship = sent_friendships.find { |friendship| friendship.receiver == user || friendship.sender == user }    
-    friendship.delete
+    friendship1 = sent_friendships.find { |friendship|  friendship.sender == user }
+    friendship2 = received_friendships.find { |friendship|  friendship.sender == user }   
+    friendship1.delete unless friendship1.nil?
+    friendship2.delete unless friendship2.nil?
   end
 
   def friend?(user)
@@ -61,5 +63,10 @@ class User < ApplicationRecord
 
   def request_received?(user)
     friend_requests.include?(user)
+  end
+  def feed
+    friends_posts = friends.map(&:id)
+    friends_posts.join(',')
+    Post.where('user_id IN (:friends_posts)',friends_posts: friends_posts, user_id: id).to_a
   end
 end

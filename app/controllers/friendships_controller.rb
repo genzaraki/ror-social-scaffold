@@ -15,35 +15,35 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    receiver = User.find(params[:user][:receiver_id])
-    return if current_user.friend?(receiver)
-
-    Friendship.create(sender_id: current_user.id, receiver_id: receiver.id, accepted: nil)
-
+    friend = User.find(params[:user][:friend_id])
+    return if current_user.friend?(friend)
+    current_user.send_friend_request(friend)
+    # Friendship.create(friend_id: friend.id, user_id: current_user.id, accepted: nil )
     redirect_to user_friendships_sent_path(current_user), notice: 'Friend Request send!.'
   end
 
   def accept
-    user = User.find(params[:user][:sender_id])
-    current_user.confirm_friend(user)
+    friend = User.find(params[:user][:friend_id])
+    current_user.confirm_friend(friend)    
+    
     redirect_to user_friendships_path(current_user), notice: 'Friend Request Accepted!.'
   end
 
   def reject
-    user = User.find(params[:user][:sender_id])
-    current_user.reject_friend(user)
+    friend = User.find(params[:user][:friend_id])
+    current_user.reject_friend(friend)
     redirect_to user_friendships_received_path(current_user), notice: 'Friend Request Rejected!.'
   end
 
   def cancel
-    user = User.find(params[:user][:sender_id])
-    current_user.cancel_friend(user)
+    friend = User.find(params[:user][:friend_id])
+    current_user.cancel_friend(friend)
     redirect_to user_friendships_sent_path(current_user), notice: 'Friend Request Ca!nceled.'
   end
 
   def destroy
-    user = User.find(params[:user][:sender_id])
-    current_user.delete_friend(user)
+    friend = User.find(params[:user][:friend_id])
+    current_user.delete_friend(friend)    
     redirect_to user_friendships_path(current_user), notice: 'Friend Removed!.'
   end
 end

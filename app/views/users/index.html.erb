@@ -30,7 +30,7 @@
 
                   <%elsif current_user.request_received?(user) %>
                     <%= form_for(current_user, url: user_friendships_accept_path(current_user),method: :post) do |f| %>
-                        <%= f.hidden_field :sender_id, value: user.id %>
+                        <%= f.hidden_field :friend_id, value: 2 %>
                         <%= f.hidden_field :accepted, value: true %>
                         <button class="tag is-white is-rounded is-small is-link">
                             <span>Accept</span>
@@ -41,7 +41,7 @@
                     <% end %> 
                   <% else%>
                     <%= form_for(current_user, url: user_friendships_path(current_user), method: :post) do |f| %>
-                      <%= f.hidden_field :receiver_id, value: user.id %>
+                      <%= f.hidden_field :friend_id, value: user.id %>
                       <%= send_friendship_button user%>
                     <% end %>
                   <% end %>

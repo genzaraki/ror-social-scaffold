@@ -17,6 +17,7 @@ class FriendshipsController < ApplicationController
   def create
     friend = User.find(params[:user][:friend_id])
     return if current_user.friend?(friend)
+
     current_user.send_friend_request(friend)
     # Friendship.create(friend_id: friend.id, user_id: current_user.id, accepted: nil )
     redirect_to user_friendships_sent_path(current_user), notice: 'Friend Request send!.'
@@ -24,8 +25,8 @@ class FriendshipsController < ApplicationController
 
   def accept
     friend = User.find(params[:user][:friend_id])
-    current_user.confirm_friend(friend)    
-    
+    current_user.confirm_friend(friend)
+
     redirect_to user_friendships_path(current_user), notice: 'Friend Request Accepted!.'
   end
 
@@ -43,7 +44,7 @@ class FriendshipsController < ApplicationController
 
   def destroy
     friend = User.find(params[:user][:friend_id])
-    current_user.delete_friend(friend)    
+    current_user.delete_friend(friend)
     redirect_to user_friendships_path(current_user), notice: 'Friend Removed!.'
   end
 end

@@ -6,7 +6,6 @@ RSpec.describe Friendship, type: :model do
   let(:friendship) { Friendship.new(user_id: user1.id, friend_id: user2.id) }
 
   it 'has to have a user_id' do
-    
     expect(friendship.user_id).to eq(user1.id)
   end
   it 'has to have a friend_id' do

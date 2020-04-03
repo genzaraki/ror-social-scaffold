@@ -25,17 +25,17 @@ class User < ApplicationRecord
   def friend_requests
     received_friendships.map { |friendship| friendship.user unless !friendship.accepted == false }.compact
   end
+
   def send_friend_request(user)
-    Friendship.create(friend_id: user.id, user_id: id, accepted: nil )
+    Friendship.create(friend_id: user.id, user_id: id, accepted: nil)
   end
-  
-  def confirm_friend(user)    
+
+  def confirm_friend(user)
     friendship = received_friendships.find { |friend_ship| friend_ship.user == user }
     friendship.accepted = true
     friends << friendship
-    friendship.save    
-    Friendship.create(friend_id:user.id , user_id: id, accepted: true )
-    
+    friendship.save
+    Friendship.create(friend_id: user.id, user_id: id, accepted: true)
   end
 
   def reject_friend(user)

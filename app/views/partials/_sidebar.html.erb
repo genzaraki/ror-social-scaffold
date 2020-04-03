@@ -1,0 +1,55 @@
+<div class="sidebar">
+    <div class="card is-hidden-mobile">
+            
+        <div class="card-content">
+            <a  href="<%= user_path(current_user) %>"> 
+            <figure class="image">
+                <img src="https://placeimg.com/60/60/people?id=<%= current_user.id%>" class="is-rounded">
+            </figure>
+            </a>
+        </div>
+        <div class="card-footer">
+            <div class="card-footer-item">
+              
+                <a  class="has-text-black has-text-centered is-size-6" title="See Profile" href="<%= user_path(current_user) %>"> <%= current_user.name %></a>
+            </div>
+        </div>
+      </div>
+    <div class="card sidebar-menu">
+        <div class="card-header">
+            <div class="card-header-title">Friendships</div>
+        </div>
+        <div class="card-content">
+            <div class="menu">
+                <ul class="menu-list">
+                    <li>
+                        <a class="" href="<%= user_friendships_path(current_user)%>">
+                            <span>Total</span>
+                            <span class="tag is-link is-rounded is-pulled-right"><%= current_user.friends.count %></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<%= user_friendships_received_path(current_user)%>">
+                            <span>Received</span>
+                            <%if current_user.friend_requests.count > 0 %>
+                            <span class="tag is-danger is-rounded is-pulled-right"><%=current_user.friend_requests.count%></span>
+                            <% else %>
+                            <span class="tag is-light is-rounded is-pulled-right">0</span>
+                            <% end %>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<%= user_friendships_sent_path(current_user)%>">
+                            <span>Pending</span>
+                            <%if current_user.pending_friends.count > 0 %>
+                            <span class="tag is-danger is-rounded is-pulled-right"><%=current_user.pending_friends.count%></span>
+                            <% else %>
+                            <span class="tag is-light is-rounded is-pulled-right">0</span>
+                            <% end %>
+                        </a>
+                    </li>
+                  </ul>
+            </div>
+        </div>
+    </div>
+</div>

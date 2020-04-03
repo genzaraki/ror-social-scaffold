@@ -1,12 +1,54 @@
 <section class="users-section">
-  <ul class="users-list">
+  <div class="notification is-white">
+        <h1 class="title is-size-6">Users</h1>
+    </div>
+  <div class="columns is-multiline">
     <% @users.each do |user| %>
-      <li>
-        Name: <%= user.name %>
-        <span class="profile-link">
-          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
-        </span>
-      </li>
+      <% next if current_user.id == user.id %>
+        <div class="column is-3-desktop">
+        
+          <div class="card">
+            
+            <div class="card-content">
+                <a  href="<%= user_path(user) %>"> 
+                <figure class="image">
+                  <%= image_tag 'avatar.jpg',class:"is-rounded" %>
+                </figure>
+                </a>
+                <div class="has-text-centered">
+
+                    <a  class="has-text-black has-text-centered is-size-6" title="See Profile" href="<%= user_path(user) %>"> <%= user.name %></a>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="card-footer-item">
+                  <% if current_user.friend?(user) %>
+                    <span class="tag is-small is-success is-rounded">
+                      <span class="icon"><%= fa_icon "check"%></span>
+                      <span>Friend</span>
+                    </span>
+
+                  <%elsif current_user.request_received?(user) %>
+                    <%= form_for(current_user, url: user_friendships_accept_path(current_user),method: :post) do |f| %>
+                        <%= f.hidden_field :sender_id, value: user.id %>
+                        <%= f.hidden_field :accepted, value: true %>
+                        <button class="tag is-white is-rounded is-small is-link">
+                            <span>Accept</span>
+                            <span class="icon">
+                              <%= fa_icon "plus"%>
+                            </span>
+                        </button>
+                    <% end %> 
+                  <% else%>
+                    <%= form_for(current_user, url: user_friendships_path(current_user), method: :post) do |f| %>
+                      <%= f.hidden_field :receiver_id, value: user.id %>
+                      <%= send_friendship_button user%>
+                    <% end %>
+                  <% end %>
+                </div>
+            </div>
+          </div>
+        </div>
     <% end %>
-  </ul>
+  </div>
 </section>

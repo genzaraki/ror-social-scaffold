@@ -1,6 +1,6 @@
-# Scaffold for social media app with Ruby on Rails
-
-> This repo includes intial code for social media app with basic styling. Its purpose is to be a starting point for Microverse students.
+# Ashu
+![screenshot](./docs/root.png)
+> Ashu is a social media network app build with RubyOnRails.
 
 ## Built With
 
@@ -9,7 +9,7 @@
 
 ## Live Demo
 
-TBA
+<a href="https://serene-brook-13829.herokuapp.com/" target="_blank">See Demo</a>
 
 
 ## Getting Started
@@ -37,6 +37,11 @@ Setup database with:
    rails db:migrate
 ```
 
+Install npm packages
+
+```
+npm install
+```
 
 
 ### Usage

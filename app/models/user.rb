@@ -12,15 +12,10 @@ class User < ApplicationRecord
 
   has_many :friendships, class_name: 'Friendship', foreign_key: 'user_id'
   has_many :received_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :friends, -> { where(friendships: { accepted: true }) }, through: :friendships
+  has_many :pending_friends, -> { where(friendships: { accepted: nil }) }, through: :friendships,:source => "friend"
 
-  def friends
-    friends = friendships.map { |friendship| friendship.friend if friendship.accepted }
-    friends.compact
-  end
 
-  def pending_friends
-    friendships.map { |friendship| friendship.friend unless friendship.accepted }.compact
-  end
 
   def friend_requests
     received_friendships.map { |friendship| friendship.user unless !friendship.accepted == false }.compact

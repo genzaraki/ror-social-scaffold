@@ -28,7 +28,6 @@ class User < ApplicationRecord
   def confirm_friend(user)
     friendship = received_friendships.find { |friend_ship| friend_ship.user == user }
     friendship.accepted = true
-    friends << friendship
     friendship.save
     Friendship.create(friend_id: user.id, user_id: id, accepted: true)
   end

@@ -1,0 +1,7 @@
+<%= form_for(current_user, url: user_friendships_reject_path(current_user),method: :post) do |f| %>
+    <%= f.hidden_field :friend_id, value: user.id %>
+    <%= f.hidden_field :confirmed, value: true %>
+    <button class="button is-white is-rounded is-small is-danger"  id="reject_friend">
+        <%= fa_icon "times"%>
+    </button>
+<% end %> 

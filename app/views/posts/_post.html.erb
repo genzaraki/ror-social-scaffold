@@ -1,30 +1,85 @@
 <li class="post">
-  <div>
-    <div class='post-attribution' >
-      <%= link_to post.user.name, user_path(post.user), class: 'post-author' %>
-    </div>
-    <div class='post-liking'>
-      <span class='post-date'> <%= post.created_at.strftime("%Y/%m/%d") %> </span>
-      <%= like_or_dislike_btn(post) %>
-    </div>
-  </div>
-  <p class="post-content">
-    <%= post.content %>
-  </p>
-
-  <div class='post-comments-section'>
-    <% post.comments.each do |comment| %>
-      <div class="post-comments">
-        <p>
-          <b><%= comment.user.name %>:</b> <%= comment.content %>
-        </p>
-        <span> <%= comment.created_at.strftime("%Y/%m/%d") %> </span>
+ 
+  <div class="card">
+    <div class="card-header">
+      <div class="card-header-title">
+        <div>
+          <figure class="image" style="width:40px;">
+            
+            <img src="https://placeimg.com/60/60/people?id=<%= post.user.id%>" class="is-rounded">
+          </figure>
+          <div>
+            <p>
+              <%= link_to post.user.name, user_path(post.user), class: 'title is-size-6 is-marginless' %>
+            </p>
+            <div class='date'> <%= post.created_at.strftime("%Y/%m/%d at %H:%M:%S") %> </div>
+          </div>
+        </div>
+        <div>
+          
+        </div>
       </div>
-    <% end %>
+      
+    </div>
+    <div class="card-content">
+    
+      <p class="post-content">
+        <%= post.content.html_safe%>
+      </p>
+    
+    <div class="post-actions">
+     
+      <%= like_or_dislike_btn(post) %> 
+      <span class="button is-small is-rounded">
+        <span class="icon"><%= fa_icon "comment" %></span>
+        <span>
+          <%= post.comments.count%>
+        </span>
+      </span>
+    </div>
+    <div class='comments-section'>
+      <% post.comments.each do |comment| %>
+        <div class="comment">
+      
+          <div class="comment-autho-avatar">
+             <figure class="image" style="width:32px;">
+              <img src="https://placeimg.com/60/60/people?id=<%= comment.user.id%>" class="is-rounded">
+            </figure>
+          </div>
+          <div class="comment-body">
+            <div class="comment-content">
+              <p>
+                <b><%= comment.user.name %></b> 
+              </p>
+              <p>
+                <%= comment.content %>
+              </p>      
+      
+            </div>
+            <div class="comment-footer">
+              <span> <%= comment.created_at.strftime("%Y/%m/%d at %H:%M:%S") %> </span>
+            </div>
+          </div>
+        </div>
+      <% end %>
 
-    <%= form_for(post.comments.new, url: post_comments_path(post)) do |form| %>
-      <%= form.text_field :content, id: :comment_content, class: 'form-control', placeholder: 'Add new Comment' %>
-      <%= form.submit 'Comment', class: 'btn btn-secondary' %>
-    <% end %>
+      <%= form_for(post.comments.new, url: post_comments_path(post)) do |form| %>
+        <div class="field has-addons">
+          <div class="control is-expanded">
+            <%= form.text_field :content, id: :comment_content, class: 'input is-small is-rounded has-background-light', placeholder: 'Add new Comment',required:true %>
+          </div>
+          <div class="control">
+            <button class="button is-light is-small is-rounded">
+              <span class="icon">
+                <%= fa_icon "send"%>
+              </span>
+            </button>
+          </div>
+        </div>
+        
+        
+      <% end %>
+    </div>
+    </div>
   </div>
 </li>

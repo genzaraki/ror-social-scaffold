@@ -20,6 +20,7 @@ class PostsController < ApplicationController
   private
 
   def timeline_posts
+    
     @timeline_posts ||= current_user.feed
   end
 

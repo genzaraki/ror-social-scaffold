@@ -17,7 +17,6 @@ class FriendshipsController < ApplicationController
   def create
     friend = User.find(params[:user][:friend_id])
     return if current_user.friend?(friend)
-
     current_user.send_friend_request(friend)
     redirect_to user_friendships_sent_path(current_user), notice: 'Friend Request send!.'
   end

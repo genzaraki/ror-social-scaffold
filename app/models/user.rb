@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -11,7 +12,9 @@ class User < ApplicationRecord
   has_many :friendships, class_name: 'Friendship', foreign_key: 'user_id'
   has_many :received_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
   has_many :friends, -> { where(friendships: { accepted: true }) }, through: :friendships
-  has_many :pending_friends, -> { where(friendships: { accepted: nil }) }, through: :friendships, source: 'friend'
+  has_many :pending_friends, -> { where(friendships: { accepted: nil }) }, through: :friendships,:source => "friend"
+
+
 
   def friend_requests
     received_friendships.map { |friendship| friendship.user unless !friendship.accepted == false }.compact
@@ -57,7 +60,7 @@ class User < ApplicationRecord
     friend_requests.include?(user)
   end
 
-  def feed
+  def feed    
     friends_posts = friends.map(&:id)
     friends_posts.join(',')
     @feed ||= Post.where('user_id IN (:friends_posts) OR user_id = :user_id', friends_posts: friends_posts, user_id: id).ordered_by_most_recent.to_a

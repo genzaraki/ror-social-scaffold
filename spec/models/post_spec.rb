@@ -5,6 +5,7 @@ RSpec.describe Post, type: :model do
   let(:post) { Post.new(content: 'A simple post content', user_id: user.id) }
 
   describe 'Validations' do
+
     it 'is valid with a content' do
       expect(post.content).to eq('A simple post content')
     end
@@ -20,10 +21,12 @@ RSpec.describe Post, type: :model do
       expect(post.save).to eq(false)
     end
   end
-
+  
   describe 'Associations' do
-    it { should belong_to(:user) }
-    it { should have_many(:comments) }
-    it { should have_many(:likes) }
+    
+      it { should belong_to(:user) }
+      it { should have_many(:comments) }
+      it { should have_many(:likes) }
   end
+
 end

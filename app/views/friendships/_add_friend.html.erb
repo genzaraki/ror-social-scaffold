@@ -1,0 +1,9 @@
+<%= form_for(current_user, url: user_friendships_path(current_user), method: :post) do |f| %>
+    <%= f.hidden_field :friend_id, value: user.id %>
+    <button class="button is-white is-rounded is-small is-light" id="add_friend">
+        <span class="icon">
+            <%= fa_icon "plus"%>
+        </span>
+        <span>Add</span>
+    </button>
+<% end %>

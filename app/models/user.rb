@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -10,45 +8,41 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  has_many :sent_friendships, class_name: 'Friendship', foreign_key: 'sender_id'
-  has_many :received_friendships, class_name: 'Friendship', foreign_key: 'receiver_id'
-
-  def friends
-    sent_friendship_requests = sent_friendships.map { |friendship| friendship.receiver if friendship.accepted }
-    received_friendship_requests = received_friendships.map { |friendship| friendship.sender if friendship.accepted }
-    (sent_friendship_requests + received_friendship_requests).compact
-  end
-
-  def pending_friends
-    sent_friendships.map { |friendship| friendship.receiver unless friendship.accepted }.compact
-  end
+  has_many :friendships, class_name: 'Friendship', foreign_key: 'user_id'
+  has_many :received_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :friends, -> { where(friendships: { accepted: true }) }, through: :friendships
+  has_many :pending_friends, -> { where(friendships: { accepted: nil }) }, through: :friendships, source: 'friend'
 
   def friend_requests
-    received_friendships.map { |friendship| friendship.sender unless !friendship.accepted == false }.compact
+    received_friendships.map { |friendship| friendship.user unless !friendship.accepted == false }.compact
+  end
+
+  def send_friend_request(user)
+    Friendship.create(friend_id: user.id, user_id: id, accepted: nil)
   end
 
   def confirm_friend(user)
-    friendship = received_friendships.find { |friend_ship| friend_ship.sender == user }
+    friendship = received_friendships.find { |friend_ship| friend_ship.user == user }
     friendship.accepted = true
-    friends << friendship
     friendship.save
+    Friendship.create(friend_id: user.id, user_id: id, accepted: true)
   end
 
   def reject_friend(user)
-    friendship = received_friendships.find { |friend_ship| friend_ship.sender == user }
-    friendship.delete
+    friendship1 = received_friendships.find { |friendship| friendship.user == user }
+    friendship1.delete
   end
 
   def cancel_friend(user)
-    friendship = sent_friendships.find { |friend_ship| friend_ship.receiver == user }
-    friendship.delete
+    friendship2 = friendships.find { |friendship| friendship.friend == user }
+    friendship2.delete
   end
 
   def delete_friend(user)
-    friendship1 = sent_friendships.find { |friendship| friendship.sender == user }
-    friendship2 = received_friendships.find { |friendship| friendship.sender == user }
-    friendship1&.delete
-    friendship2&.delete
+    friendship1 = friendships.find { |friendship| friendship.friend == user }
+    friendship1.delete
+    friendship2 = received_friendships.find { |friendship| friendship.user == user }
+    friendship2.delete
   end
 
   def friend?(user)
@@ -66,6 +60,6 @@ class User < ApplicationRecord
   def feed
     friends_posts = friends.map(&:id)
     friends_posts.join(',')
-    Post.where('user_id IN (:friends_posts)', friends_posts: friends_posts, user_id: id).to_a
+    @feed ||= Post.where('user_id IN (:friends_posts) OR user_id = :user_id', friends_posts: friends_posts, user_id: id).ordered_by_most_recent.to_a
   end
 end

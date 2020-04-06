@@ -3,7 +3,7 @@
         <div class="title">
           <%= "#{@user.name}" %>
           <div class="is-pulled-right">
-            <%= render "partials/friend_actions" %>
+            <%= friendship_button(@user) %> 
           </div>
         </div>
         <div class="subtitle">

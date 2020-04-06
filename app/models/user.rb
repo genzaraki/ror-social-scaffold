@@ -1,6 +1,5 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -61,9 +60,9 @@ class User < ApplicationRecord
     friend_requests.include?(user)
   end
 
-  def feed
-    friends_posts = friendships.map(&:id)
+  def feed    
+    friends_posts = friends.map(&:id)
     friends_posts.join(',')
-    Post.where('user_id IN (:friends_posts)', friends_posts: friends_posts, user_id: id).to_a
+    @feed ||= Post.where('user_id IN (:friends_posts) OR user_id = :user_id', friends_posts: friends_posts, user_id: id).ordered_by_most_recent.to_a
   end
 end

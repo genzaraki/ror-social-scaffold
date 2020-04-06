@@ -23,8 +23,6 @@ module FriendshipsHelper
     end
   end
 
-
-
   def add_friendship(user)
     render 'friendships/add_friend', user: user unless current_user.friend?(user)
   end

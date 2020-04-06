@@ -9,7 +9,7 @@
 
 ## Live Demo
 
-<a href="https://serene-brook-13829.herokuapp.com/" target="_blank">See Demo</a>
+[See Demo](https://blooming-escarpment-87825.herokuapp.com/users/sign_in){:target="_blank"}
 
 
 ## Getting Started

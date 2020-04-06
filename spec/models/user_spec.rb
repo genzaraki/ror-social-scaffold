@@ -85,7 +85,7 @@ RSpec.describe User, type: :model do
       friend.confirm_friend(user2)
       expect(friend.friend?(user2)).to be_truthy
     end
- 
+
     it 'is valid with request_sent? true' do
       user2.send_friend_request(friend)
       expect(user2.request_sent?(friend)).to be_truthy

@@ -9,7 +9,7 @@
 
 ## Live Demo
 
-[See Demo](https://blooming-escarpment-87825.herokuapp.com/users/sign_in){:target="_blank"}
+[See Demo](https://blooming-escarpment-87825.herokuapp.com/users/sign_in)
 
 
 ## Getting Started

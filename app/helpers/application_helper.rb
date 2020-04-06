@@ -6,6 +6,4 @@ module ApplicationHelper
       fa_icon(icon.to_s, text: link_text.to_s)
     end
   end
-
-  
 end

@@ -22,7 +22,7 @@ RSpec.describe Friendship, type: :model do
     end
   end
 
-  describe 'Associations' do    
+  describe 'Associations' do
     it { should belong_to(:user) }
     it { should belong_to(:friend) }
   end

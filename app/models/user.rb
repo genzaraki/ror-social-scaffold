@@ -49,9 +49,9 @@ class User < ApplicationRecord
   end
 
   def delete_friend(user)
-    friendship1 = friendships.find { |friendship| friendship.user == user }
+    friendship1 = friendships.find { |friendship| friendship.friend == user }
     friendship1.delete
-    friendship2 = received_friendships.find { |friendship| friendship.friend == user }
+    friendship2 = received_friendships.find { |friendship| friendship.user == user }
     friendship2.delete
   end
 

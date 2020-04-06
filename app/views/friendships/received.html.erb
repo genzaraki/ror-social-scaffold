@@ -2,76 +2,7 @@
     <div class="notification is-white">
         <h1 class="title is-size-6">Frienships requests received</h1>
     </div>
-  <% if @users.count>0 %>
-    <div class="columns is-multiline">
-        <% @users.each do |user| %>
-            <div class="column is-3-desktop">
-            
-            <div class="card">
-                
-                <div class="card-content">
-                    <a  href="<%= user_path(user) %>"> 
-                    <figure class="image">
-                    <img src="https://placeimg.com/60/60/people?id=<%= user.id%>" class="is-rounded">
-                    </figure>
-                    </a>
-                    <p class="has-text-centered">
 
-                        <a  class="has-text-black has-text-centered is-size-6" title="See Profile" href="<%= user_path(user) %>"> <%= user.name %></a>
-                    </p>
-                    <p class="has-text-centered">
+    <%= received_requests(@users) %>
 
-                    </p>
-                </div>
-                <div class="card-footer">
-                    <% if !current_user.friend?(user)%>
-                    <div class="card-footer-item">               
-                        <%= form_for(current_user, url: user_friendships_accept_path(current_user),method: :post) do |f| %>
-                            <%= f.hidden_field :friend_id, value: user.id %>
-                            <%= f.hidden_field :confirmed, value: true %>
-                            <button class="button is-white is-rounded is-small is-success" id="accept_friend">
-                                <%= fa_icon "check"%>
-                            </button>
-                        <% end %> 
-                    </div>
-                    <div class="card-footer-item">               
-                        <%= form_for(current_user, url: user_friendships_reject_path(current_user),method: :post) do |f| %>
-                            <%= f.hidden_field :friend_id, value: user.id %>
-                            <%= f.hidden_field :confirmed, value: true %>
-                            <button class="button is-white is-rounded is-small is-danger"  id="reject_friend">
-                                <%= fa_icon "times"%>
-                            </button>
-                        <% end %> 
-                    </div>
-                    <% else %>
-                    <div class="card-footer-item">             
-                    
-                    </div>
-                    <div class="card-footer-item">               
-                        <%= form_for(current_user, url: user_friendships_reject_path(current_user),method: :post) do |f| %>
-                            <%= f.hidden_field :friend_id, value: user.id %>
-                            <%= f.hidden_field :confirmed, value: true %>
-                            <button class="button is-white is-rounded is-small is-danger">
-                                <%= fa_icon "times"%>
-                            </button>
-                        <% end %> 
-                    </div>
-                    <% end %>
-                </div>
-                
-            </div>
-            </div>
-        <% end %>
-    </div>
-  <% else %>
-    <div class="notification is-white has-text-centered">
-      <p>
-        You have no friend requests for now.
-      </p>
-      <br>
-      <a href="<%= users_path %>" class="button is-primary is-rounded">Find friends</a>
-    </div>
-
-    
-  <% end %>
 </section>

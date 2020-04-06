@@ -1,0 +1,8 @@
+<%= form_for(current_user, url: user_friendship_path(current_user,user),method: :DELETE) do |f| %>
+    <%= f.hidden_field :friend_id, value: user.id %>
+    <%= f.hidden_field :confirmed, value: true %>
+    <button class="button is-white is-rounded is-small is-danger" id="delete_friend">
+        <span class="icon"><%= fa_icon "times"%></span>
+        <span>Delete</span>                            
+    </button>
+<% end %> 

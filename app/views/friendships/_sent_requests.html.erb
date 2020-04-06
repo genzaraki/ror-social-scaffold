@@ -20,16 +20,8 @@
               </div>
               <div class="card-footer">
                   
-                <div class="card-footer-item">               
-                    <%= form_for(current_user, url: user_friendships_cancel_path(current_user),method: :post) do |f| %>
-                        <%= f.hidden_field :friend_id, value: user.id %>
-                        <%= f.hidden_field :confirmed, value: true %>
-                        <button class="button is-white is-rounded is-small is-danger" id="cancel_friend">
-                            <span class="icon"> <%= fa_icon "times"%></span>
-                            <span>Cancel</span>
-                          
-                        </button>
-                    <% end %> 
+                <div class="card-footer-item">
+                    <%= cancel_friendship(user)%>            
                 </div>
               </div>
               

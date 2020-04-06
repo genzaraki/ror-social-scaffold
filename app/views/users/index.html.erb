@@ -22,29 +22,8 @@
             </div>
             <div class="card-footer">
                 <div class="card-footer-item">
-                  <% if current_user.friend?(user) %>
-                    <span class="tag is-small is-success is-rounded">
-                      <span class="icon"><%= fa_icon "check"%></span>
-                      <span>Friend</span>
-                    </span>
-
-                  <%elsif current_user.request_received?(user) %>
-                    <%= form_for(current_user, url: user_friendships_accept_path(current_user),method: :post) do |f| %>
-                        <%= f.hidden_field :friend_id, value: 2 %>
-                        <%= f.hidden_field :accepted, value: true %>
-                        <button class="tag is-white is-rounded is-small is-link">
-                            <span>Accept</span>
-                            <span class="icon">
-                              <%= fa_icon "plus"%>
-                            </span>
-                        </button>
-                    <% end %> 
-                  <% else%>
-                    <%= form_for(current_user, url: user_friendships_path(current_user), method: :post) do |f| %>
-                      <%= f.hidden_field :friend_id, value: user.id %>
-                      <%= send_friendship_button user%>
-                    <% end %>
-                  <% end %>
+                  <%= friendship_button(user) %> 
+             
                 </div>
             </div>
           </div>

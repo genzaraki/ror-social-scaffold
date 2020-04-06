@@ -34,10 +34,8 @@ RSpec.feature 'Friendships', type: :feature do
       expect(page).to have_content(user2.name.to_s)
       click_button 'cancel_friend'
       expect(current_path).to eq user_friendships_sent_path(user1)
-      expect(page).to have_content("You have no friend requests sent for now.")
-      
+      expect(page).to have_content('You have no friend requests sent for now.')
     end
-    
   end
   context 'Respond to a friend request' do
     before do
@@ -85,5 +83,4 @@ RSpec.feature 'Friendships', type: :feature do
       expect(page).to have_content('You have no friend for now.')
     end
   end
-  
 end

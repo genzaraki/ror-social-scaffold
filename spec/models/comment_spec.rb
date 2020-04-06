@@ -17,7 +17,7 @@ RSpec.describe Comment, type: :model do
         expect(comment.content).to eq('A simple comment!')
       end
     end
-  
+
     context 'it has to return an error for missing fields' do
       it 'returns an error for missing post_id' do
         comment.post_id = nil
@@ -33,7 +33,7 @@ RSpec.describe Comment, type: :model do
       end
     end
   end
-  describe 'Associations' do    
+  describe 'Associations' do
     it { should belong_to(:user) }
     it { should belong_to(:post) }
   end

@@ -7,6 +7,16 @@
 - Ruby v2.7.0
 - Ruby on Rails v5.2.4
 
+## Features
+* Tweet Comment and Like
+* User Following
+* Profile page
+
+## Future features
+* Cover Image and profile image upload
+* Image Sharing 
+* Video Sharing
+
 ## Live Demo
 
 [See Demo](https://blooming-escarpment-87825.herokuapp.com/users/sign_in) 

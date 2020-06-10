@@ -1,11 +1,29 @@
 # Ashu
-![screenshot](./docs/root.png)
-> Ashu is a social media network app build with RubyOnRails.
+![screenshot](./docs/screenshot.png)
+<p align="center">
+   <h3 align="center">Ashu</h3>
+
+  <p align="center">
+    Ashu is a Twitter-like social network where users can create, comment and like posts, but also follow other users. This app is build with Ruby On Rails.
+    <br />    
+    <br />
+    ·
+     <a href="https://blooming-escarpment-87825.herokuapp.com/users/sign_in" target="_blank">View Demo</a>
+    ·    
+  </p>
+</p>
+
+
+
+
 
 ## Built With
 
 - Ruby v2.7.0
 - Ruby on Rails v5.2.4
+- Html/Erb
+- Css
+
 
 ## Features
 * Tweet Comment and Like
